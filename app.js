@@ -22,6 +22,8 @@ app.use(
   })
 );
 
+
+
 app.use((req, res, next) => {
   res.locals.usuario = req.session.usuario || null;
   next();
@@ -29,7 +31,7 @@ app.use((req, res, next) => {
 
 const { autenticado, permitir } = require('./middlewares/auth');
 app.use(require('./routes/auth'));
-
+app.use('/usuarios', require('./routes/usuarios'));
 app.get('/', autenticado, (req, res) => res.render('home'));
 
 

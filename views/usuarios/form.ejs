@@ -1,0 +1,23 @@
+<%- include('../partials/header', { titulo: 'Usuário' }) %>
+
+<h2><%= u ? 'Editar usuário' : 'Novo usuário' %></h2>
+<% if (erro) { %><div class="alert alert-danger"><%= erro %></div><% } %>
+
+<form method="POST" action="<%= u ? '/usuarios/' + u.id + '?_method=PUT' : '/usuarios' %>" style="max-width: 450px;">
+  <input class="form-control mb-2" type="text" name="nome" placeholder="Nome"
+         value="<%= u ? u.nome : '' %>" required>
+  <input class="form-control mb-2" type="email" name="email" placeholder="E-mail"
+         value="<%= u ? u.email : '' %>" required>
+  <input class="form-control mb-2" type="password" name="senha"
+         placeholder="<%= u ? 'Nova senha (deixe vazio para manter)' : 'Senha' %>"
+         <%= u ? '' : 'required' %>>
+  <select class="form-select mb-3" name="perfil">
+    <% perfis.forEach(p => { %>
+      <option value="<%= p %>" <%= u && u.perfil === p ? 'selected' : '' %>><%= p %></option>
+    <% }) %>
+  </select>
+  <button class="btn btn-success">Salvar</button>
+  <a href="/usuarios" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<%- include('../partials/footer') %>

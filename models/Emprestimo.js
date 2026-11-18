@@ -17,4 +17,4 @@ const Emprestimo = sequelize.define('Emprestimo', {
   },
 });
 
-module.exports = Emprestimo;
+module.exports = Emprestimo;    
