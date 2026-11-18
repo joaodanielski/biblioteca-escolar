@@ -13,6 +13,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/api', require('./routes/api'));
 app.use(methodOverride('_method'));
 app.use(
   session({
