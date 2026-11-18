@@ -22,9 +22,16 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  res.send('Biblioteca Escolar no ar!');
+app.use((req, res, next) => {
+  res.locals.usuario = req.session.usuario || null;
+  next();
 });
+
+const { autenticado, permitir } = require('./middlewares/auth');
+app.use(require('./routes/auth'));
+
+app.get('/', autenticado, (req, res) => res.render('home'));
+
 
 const PORT = process.env.PORT || 3000;
 
