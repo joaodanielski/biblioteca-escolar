@@ -13,6 +13,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('./docs/swagger');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use('/api', require('./routes/api'));
 app.use(methodOverride('_method'));
 app.use(
